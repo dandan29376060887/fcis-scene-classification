@@ -25,3 +25,7 @@ kaggle.json
 .DS_Store
 Thumbs.db
 .vscode/
+
+# Keep the Python package named data tracked; only the competition data directory is ignored.
+!/src/scene_clf/data/
+!/src/scene_clf/data/*.py
