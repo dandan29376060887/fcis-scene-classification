@@ -82,7 +82,7 @@ model, so comparisons are fair.
 ## Train on Google Colab
 
 Open [`colab_train.ipynb`](colab_train.ipynb) in Google Colab, choose a GPU
-runtime, and add `KAGGLE_USERNAME` and `KAGGLE_KEY` in Colab Secrets. Accept
+runtime, and add `KAGGLE_API_TOKEN` in Colab Secrets. Accept
 the competition rules on Kaggle first. The notebook clones this repository,
 downloads the competition data directly from Kaggle, and trains the scratch
 CNNs and ViT plus a pretrained ResNet-18 bonus. The dataset, checkpoints, and
