@@ -1,0 +1,38 @@
+{
+  "data": {
+    "root": "Data",
+    "image_size": 224,
+    "val_fraction": 0.15,
+    "batch_size": 32,
+    "num_workers": 2,
+    "seed": 42,
+    "augment": true
+  },
+  "model": {
+    "name": "vit_scratch",
+    "num_classes": 11,
+    "dropout": 0.1,
+    "base_channels": 32,
+    "pretrained": false,
+    "extra": {
+      "patch_size": 16,
+      "depth": 4,
+      "heads": 4,
+      "mlp_ratio": 4.0,
+      "image_size": 224
+    }
+  },
+  "train": {
+    "epochs": 30,
+    "lr": 0.0003,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "early_stopping_patience": 7,
+    "class_weighted": false,
+    "grad_clip": 1.0,
+    "device": "auto",
+    "out_dir": "runs/vit_scratch",
+    "seed": 42
+  }
+}

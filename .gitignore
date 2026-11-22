@@ -1,0 +1,27 @@
+# Local Python environments and caches
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Competition dataset and model outputs stay outside the public repository
+Data/
+data/
+runs/
+*.pt
+*.pth
+*.zip
+submission.csv
+
+# Local credentials and notebook runtime artifacts
+kaggle.json
+.env
+.env.*
+!*.env.example
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+.vscode/

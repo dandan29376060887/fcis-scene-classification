@@ -1,0 +1,31 @@
+{
+  "data": {
+    "root": "Data",
+    "image_size": 224,
+    "val_fraction": 0.15,
+    "batch_size": 64,
+    "num_workers": 2,
+    "seed": 42,
+    "augment": true
+  },
+  "model": {
+    "name": "se_cnn",
+    "num_classes": 11,
+    "dropout": 0.3,
+    "base_channels": 32,
+    "pretrained": false
+  },
+  "train": {
+    "epochs": 40,
+    "lr": 0.001,
+    "weight_decay": 0.0001,
+    "optimizer": "adamw",
+    "scheduler": "cosine",
+    "early_stopping_patience": 7,
+    "class_weighted": false,
+    "grad_clip": 1.0,
+    "device": "auto",
+    "out_dir": "runs/se_cnn",
+    "seed": 42
+  }
+}
