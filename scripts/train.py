@@ -26,6 +26,7 @@ def main() -> None:
     parser.add_argument("--data-root", help="override config.data.root")
     parser.add_argument("--out-dir", help="override config.train.out_dir")
     parser.add_argument("--epochs", type=int, help="override config.train.epochs")
+    parser.add_argument('--resume', action='store_true', help='resume from out_dir/state.pt when present')
     args = parser.parse_args()
 
     cfg = Config.from_json(args.config)
@@ -42,7 +43,8 @@ def main() -> None:
 
     train_loader, val_loader = make_train_val_loaders(cfg.data)
     model = build_model(cfg.model)
-    print(f"model={cfg.model.name} params={model.num_parameters():,}")
+    parameter_count = model.num_parameters() if hasattr(model, 'num_parameters') else sum(p.numel() for p in model.parameters() if p.requires_grad)
+    print(f'model={cfg.model.name} params={parameter_count:,}')
 
     train_labels = [label for _, label in read_labels_csv(Path(cfg.data.root) / cfg.data.labels_csv)]
     label_to_idx = train_loader.dataset.class_to_idx
@@ -56,6 +58,10 @@ def main() -> None:
         train_labels=train_label_idx,
         num_classes=cfg.model.num_classes,
     )
+    state_path = Path(cfg.train.out_dir) / 'state.pt'
+    if args.resume and state_path.exists():
+        trainer.load_state()
+        print(f'Resuming from epoch {trainer._start_epoch}', flush=True)
     trainer.fit()
     report = trainer.evaluate()
     print(f"best val acc: {report['val_acc']:.4f}")
@@ -64,3 +70,4 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
